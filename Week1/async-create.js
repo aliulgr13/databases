@@ -5,12 +5,13 @@ const connection = mysql.createConnection({
   host: 'localhost',
   user: 'hyfuser',
   password: 'hyfpassword',
-  database: 'class19',
+  database: 'meetup',
 });
 
 const execQuery = util.promisify(connection.query.bind(connection));
 
 async function seedDatabase() {
+
   const CREATE_STUDENTS_TABLE = `
     CREATE TABLE IF NOT EXISTS students (
       student_number INT,
@@ -48,10 +49,10 @@ async function seedDatabase() {
 
   try {
     await Promise.all[execQuery(CREATE_STUDENTS_TABLE), execQuery(CREATE_TEACHERS_TABLE)];
-    
+
     await Promise.all(students.map(student =>
       execQuery('INSERT INTO students SET ?', student)
-    );
+    ));
   } catch (error) {
     console.error(error);
   }
