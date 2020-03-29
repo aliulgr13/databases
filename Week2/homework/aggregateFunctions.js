@@ -1,4 +1,3 @@
-const at = `select rp.paper_title, count(distinct a.author_no) as 'numbOfAuthors' from author_paper a right join research_papers rp on rp.paper_id = a.paper_id group by rp.paper_id;`;
 
 const util = require("util");
 const mysql = require("mysql");
